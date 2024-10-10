@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XSS Proof of Concept</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      div {
+        text-align: center;
+      }
+      textarea,
+      button {
+        margin: 10px;
+      }
+      textarea {
+        width: 24rem;
+        height: 8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!-- Use textarea for multiline input -->
+      <textarea id="userInput">
+&lt;button onclick='alert(&quot;XSS&quot;)'&gt;Click me for XSS&lt;/button&gt;</textarea
+      >
+      <br /><br />
+      <!-- Button to apply the plain text as HTML -->
+      <button
+        onclick="document.getElementById('output').innerHTML = document.getElementById('userInput').value"
+      >
+        Apply Dynamic HTML
+      </button>
+      <br /><br />
+      <!-- Output div where the content will be displayed -->
+      <div id="output"></div>
+    </div>
+  </body>
+</html>
