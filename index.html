@@ -11,34 +11,57 @@
         align-items: center;
         height: 100vh;
         font-family: Arial, sans-serif;
+        padding: 1rem;
       }
       div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
       }
       textarea,
       button {
-        margin: 10px;
+        margin: 1rem;
       }
       textarea {
-        width: 24rem;
+        width: 100%;
+        max-width: 24rem;
         height: 8rem;
+        min-width: 16rem;
+        padding: 0.5rem;
+      }
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+      }
+      #output {
+        margin-top: 1rem;
+        word-wrap: break-word;
+        max-width: 24rem;
       }
     </style>
   </head>
   <body>
     <div>
+      <!-- Instructional text for the user -->
+      <p>
+        Enter some legitimate user input (e.g., "Hello, World!") and potentially
+        malicious code. Both will be processed and displayed below.
+      </p>
+
       <!-- Use textarea for multiline input -->
       <textarea id="userInput">
-&lt;button onclick='alert(&quot;XSS&quot;)'&gt;Click me for XSS&lt;/button&gt;</textarea
-      >
-      <br /><br />
+Hello, World!
+&lt;img src="invalid.jpg" onerror="alert('XSS executed!')"&gt;
+      </textarea>
+
       <!-- Button to apply the plain text as HTML -->
       <button
         onclick="document.getElementById('output').innerHTML = document.getElementById('userInput').value"
       >
-        Apply Dynamic HTML
+        Display User Input
       </button>
-      <br /><br />
+
       <!-- Output div where the content will be displayed -->
       <div id="output"></div>
     </div>
